@@ -7,7 +7,7 @@
     >
       <div
         :class="$attrs.class"
-        class="relative mt-20 flex flex-col max-w-2xl mx-auto rounded-lg py-10 px-4 sm:py-6 sm:px-6 lg:max-w-7xl lg:px-8 bg-white shadow-2xl"
+        class="relative mt-20 flex flex-col max-w-2xl mx-auto rounded-lg py-10 px-4 sm:py-10 sm:px-8 lg:max-w-7xl lg:px-8 bg-white shadow-2xl"
       >
         <button
           type="button"
