@@ -22,8 +22,10 @@
       <div class="mt-6">
         <dl class="space-y-4">
           <div class="flex items-center justify-between">
-            <dt class="text-base font-medium text-gray-900">Subtotal</dt>
-            <dd class="ml-4 text-base font-medium text-gray-900">$96.00</dd>
+            <dt class="text-base font-medium text-gray-900">Order total</dt>
+            <dd class="ml-4 text-base font-medium text-gray-900">
+              {{ orderTotal }}
+            </dd>
           </div>
         </dl>
 
@@ -76,8 +78,12 @@ export default {
       return !!this.products.length;
     },
 
-    total() {
-      return this.totalAmount;
+    orderTotal() {
+      return `${this.currencySymbol}${this.totalAmount}`;
+    },
+
+    currencySymbol() {
+      return this.products.length ? this.products[0].currencySymbol : "";
     },
   },
 
