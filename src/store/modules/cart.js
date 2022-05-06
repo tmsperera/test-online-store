@@ -9,6 +9,14 @@ export default {
     totalProducts({ products }) {
       return products.length;
     },
+
+    totalAmount({ products }) {
+      return products.reduce(
+        (totalAmount, product) =>
+          parseFloat(totalAmount) + parseFloat(product.price),
+        0
+      );
+    },
   },
 
   mutations: {

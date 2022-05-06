@@ -1,24 +1,35 @@
 <template>
-  <CartWidget />
+  <div class="bg-white">
+    <div
+      class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8"
+    >
+      <div class="flex justify-between items-center">
+        <h2
+          class="text-2xl align-middle font-extrabold tracking-tight text-gray-900"
+        >
+          Best Sellers
+        </h2>
 
-  <h2 class="text-2xl font-extrabold tracking-tight text-gray-900">
-    Best Sellers
-  </h2>
+        <CartWidget />
+      </div>
 
-  <div
-    class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-  >
-    <ShowcaseProduct
-      v-for="product in products"
-      :key="product.id"
-      :product="product"
-    />
+      <div
+        class="mt-6 grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8"
+      >
+        <ShowcaseProduct
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import ShowcaseProduct from "@/components/ShowcaseProduct";
 import CartWidget from "@/components/CartWidget";
+import products from "@/database/products";
 
 export default {
   name: "App",
@@ -30,38 +41,7 @@ export default {
 
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          title: "Product 1",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-          imageAlt: "Front of men's Basic Tee in black.",
-          price: "$35",
-          color: "Black",
-        },
-        {
-          id: 2,
-          title: "Product 2",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-          imageAlt: "Front of men's Basic Tee in black.",
-          price: "$35",
-          color: "Black",
-        },
-        {
-          id: 3,
-          title: "Product 3",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-          imageAlt: "Front of men's Basic Tee in black.",
-          price: "$35",
-          color: "Black",
-        },
-      ],
+      products: products,
     };
   },
 };

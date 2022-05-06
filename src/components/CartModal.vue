@@ -1,28 +1,60 @@
 <template>
-  <BaseModal :is-showing="isShowing" @close="close">
-    <ul
-      v-if="hasItems"
-      role="list"
-      class="divide-y divide-gray-200 px-4 sm:px-6 lg:px-8"
+  <BaseModal :is-showing="isShowing" @close="close" class="lg:max-w-3xl">
+    <h1
+      class="text-2xl font-extrabold align-middle text-center tracking-tight text-gray-900"
     >
-      <CartProduct
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-      />
-    </ul>
+      Shopping Cart
+    </h1>
 
-    <p v-if="!hasItems">Cart is empty</p>
+    <div v-if="hasItems">
+      <ul
+        v-if="hasItems"
+        role="list"
+        class="mt-6 border-b divide-y divide-gray-200"
+      >
+        <CartProduct
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
+      </ul>
+
+      <div class="mt-6">
+        <dl class="space-y-4">
+          <div class="flex items-center justify-between">
+            <dt class="text-base font-medium text-gray-900">Subtotal</dt>
+            <dd class="ml-4 text-base font-medium text-gray-900">$96.00</dd>
+          </div>
+        </dl>
+
+        <p class="mt-1 text-sm text-gray-500">
+          Shipping and taxes will be calculated at checkout.
+        </p>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button
+          type="submit"
+          class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+        >
+          Continue to Payment
+        </button>
+      </div>
+    </div>
+
+    <p v-if="!hasItems" class="py-6 text-gray-500 text-center">Cart is empty</p>
   </BaseModal>
 </template>
 
 <script>
 import BaseModal from "@/components/BaseModal";
 import CartProduct from "@/components/CartProduct";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "CartModal",
+
+  emits: ["close"],
 
   components: {
     BaseModal,
@@ -38,9 +70,14 @@ export default {
 
   computed: {
     ...mapState("cart", ["products"]),
+    ...mapGetters("cart", ["totalAmount"]),
 
     hasItems() {
       return !!this.products.length;
+    },
+
+    total() {
+      return this.totalAmount;
     },
   },
 
